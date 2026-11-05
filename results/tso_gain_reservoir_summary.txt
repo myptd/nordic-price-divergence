@@ -1,0 +1,52 @@
+Hypothesis: in NO zones the daily gain from the TSO wind and solar forecasts is larger when reservoir filling is below
+its seasonal norm (slope < 0). gain = MAE(no_vre) - MAE(base) per day, EUR/MWh, 2025 per-hour LightGBM forecasts.
+Deviation = stored energy known at 11:00 on D-1 minus its 2018-2024 median for the ISO week of D (TWh).
+Per zone: OLS with month fixed effects, Newey-West SE (7 lags); one-sided p for slope < 0; Holm across NO1-NO4
+(NO5 undefined: gain identically 0). SE1-SE4 are the contrast, not in the Holm family.
+Pooled NO1-NO4: zone-by-month fixed effects, Driscoll-Kraay SE (7 lags).
+
+          zone  n_days  mean_gain_eur  mean_deviation_twh  sd_deviation_twh  slope_eur_per_twh      se  p_one_sided  p_one_sided_holm  p_two_sided  slope_per_sd  se_per_sd
+           NO1     365         0.3101              0.0716            0.6052            -0.0759  0.2789       0.3928            0.7857       0.7857       -0.0459     0.1688
+           NO2     365         0.4959             -0.9809            3.7424             0.1085  0.1806       0.7259            0.7857       0.5483        0.4059     0.6761
+           NO3     365         0.3121              1.5491            0.7997            -0.2819  0.4398       0.2608            0.7824       0.5216       -0.2254     0.3517
+           NO4     365         0.2783              4.7300            1.2971            -0.2035  0.1869       0.1381            0.5525       0.2763       -0.2639     0.2424
+           NO5     365         0.0000              0.7057            0.8705                NaN     NaN          NaN               NaN          NaN           NaN        NaN
+           SE1     365         0.7664              2.1289            1.1015            -0.2000  0.4083       0.3121               NaN       0.6243       -0.2203     0.4498
+           SE2     365         1.5533              2.4537            1.8203             0.7982  0.5647       0.9212               NaN       0.1575        1.4529     1.0279
+           SE3     365         2.1399              0.0454            0.2223             5.9849  3.0949       0.9734               NaN       0.0531        1.3306     0.6881
+           SE4     365         2.7986             -0.0315            0.0155            -0.6832 34.5955       0.4921               NaN       0.9842       -0.0106     0.5349
+NO1-NO4 pooled    1460         0.3491                 NaN            1.6111             0.0269  0.1449       0.5737               NaN       0.8526        0.0434     0.2334
+
+NO zones with slope < 0 at Holm 0.05: none
+Pooled NO1-NO4: slope 0.027 EUR/MWh per TWh (s.e. 0.145), one-sided p 0.574; per SD 0.043 EUR/MWh
+
+Plausibility check, 2025 (NVE not a model input): correlation of the ENTSO-E deviation with the NVE fill anomaly
+(percentage points vs NVE's 20-year weekly median) and the mean NVE anomaly:
+  NO1: r = 0.971, mean NVE anomaly -0.0 pp
+  NO2: r = 0.960, mean NVE anomaly -5.4 pp
+  NO3: r = 0.947, mean NVE anomaly +15.2 pp
+  NO4: r = 0.832, mean NVE anomaly +17.6 pp
+  NO5: r = 0.889, mean NVE anomaly +1.8 pp
+
+TSO-forecast gain in EUR/MWh, 2025 (MAE without - MAE base; 95% day-bootstrap interval):
+ zone       input_set  n_hours  MAE_base  MAE_without  gain_eur  ci_low  ci_high  gain_pct_MAE_base
+  NO1          no_vre     8759   12.4822      12.7925    0.3103  0.0588   0.5715             2.4861
+  NO1 prices_calendar     8759   12.4822      12.8917    0.4095  0.1453   0.6817             3.2804
+  NO2          no_vre     8759   11.7648      12.2609    0.4961  0.1448   0.8439             4.2172
+  NO2 prices_calendar     8759   11.7648      12.2513    0.4865  0.1467   0.8366             4.1352
+  NO3          no_vre     8759    7.9253       8.2374    0.3120 -0.0058   0.6403             3.9372
+  NO3 prices_calendar     8759    7.9253       8.2273    0.3019 -0.0032   0.6301             3.8099
+  NO4          no_vre     8759    4.3199       4.5983    0.2783  0.1131   0.4562             6.4427
+  NO4 prices_calendar     8759    4.3199       4.6262    0.3062  0.1441   0.4909             7.0891
+  NO5          no_vre     8759    8.5314       8.5314    0.0000  0.0000   0.0000             0.0000
+  NO5 prices_calendar     8759    8.5314       8.6652    0.1338 -0.0300   0.3071             1.5687
+  SE1          no_vre     8759    9.6401      10.4065    0.7664  0.3510   1.1975             7.9502
+  SE1 prices_calendar     8759    9.6401      10.3718    0.7317  0.3076   1.2008             7.5905
+  SE2          no_vre     8759    9.4895      11.0429    1.5534  0.7929   2.2917            16.3699
+  SE2 prices_calendar     8759    9.4895      11.1182    1.6287  0.8056   2.3724            17.1634
+  SE3          no_vre     8759   16.0511      18.1916    2.1405  1.3732   2.8975            13.3357
+  SE3 prices_calendar     8759   16.0511      18.6555    2.6045  1.8132   3.4270            16.2262
+  SE4          no_vre     8759   18.2259      21.0242    2.7984  1.9392   3.6296            15.3537
+  SE4 prices_calendar     8759   18.2259      21.2245    2.9986  2.1226   3.8616            16.4523
+DE_LU          no_vre     8759   13.7623      18.0318    4.2695  3.5971   4.9695            31.0228
+DE_LU prices_calendar     8759   13.7623      18.0933    4.3310  3.6315   5.0859            31.4702

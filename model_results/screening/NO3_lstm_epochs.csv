@@ -1,0 +1,4 @@
+zone,model,seed,epochs_run,best_epoch,best_es_loss
+NO3,lstm,42,51,26,0.48015421628952026
+NO3,lstm,7,54,29,0.48018887639045715
+NO3,lstm,123,64,39,0.4756637513637543

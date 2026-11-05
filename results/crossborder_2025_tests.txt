@@ -1,0 +1,25 @@
+Cross-border inputs (DE-LU, DK1, NL D-1 prices), per-hour LightGBM, 2025.
+delta = rMAE without - rMAE with (positive: the inputs help). DM p-values are one-sided and raw.
+
+zone  coupling_2024        split  n_hours  MAE_without  MAE_with  rMAE_without  rMAE_with  delta_rMAE  dm_with_better  p_with_better  dm_without_better  p_without_better
+ NO1          0.551 above median     8759      12.4822   12.3625        0.5025     0.4977      0.0048          1.4985         0.0670            -1.4985            0.9330
+ NO2          0.668 above median     8759      11.7648   11.6323        0.4855     0.4800      0.0055          1.8114         0.0350            -1.8114            0.9650
+ NO3          0.304 below median     8759       7.9253    7.8941        0.4935     0.4915      0.0019          0.9204         0.1787            -0.9204            0.8213
+ NO4          0.248 below median     8759       4.3199    4.2781        0.5028     0.4979      0.0049          1.4604         0.0721            -1.4604            0.9279
+ NO5          0.424       median     8759       8.5314    8.5276        0.4720     0.4718      0.0002          0.0608         0.4758            -0.0608            0.5242
+ SE1          0.277 below median     8759       9.6401    9.4961        0.4553     0.4485      0.0068          1.6272         0.0518            -1.6272            0.9482
+ SE2          0.249 below median     8759       9.4895    9.2818        0.4329     0.4234      0.0095          1.8113         0.0351            -1.8113            0.9649
+ SE3          0.538 above median     8759      16.0511   15.7537        0.4726     0.4638      0.0088          2.1456         0.0160            -2.1456            0.9840
+ SE4          0.710 above median     8759      18.2259   18.0109        0.4773     0.4717      0.0056          1.6881         0.0457            -1.6881            0.9543
+
+H1: Spearman rho(delta, coupling) = -0.100; exact one-sided p = 0.6122 (362,880 orderings); NOT SUPPORTED (p >= 0.05)
+
+H2: NO3, NO4, SE1, SE2, one-sided DM p that the inputs help, Holm-adjusted over the four zones
+zone  delta_rMAE  dm_with_better  p_with_better  p_with_better_holm_H2
+ NO3      0.0019          0.9204         0.1787                 0.1787
+ NO4      0.0049          1.4604         0.0721                 0.1555
+ SE1      0.0068          1.6272         0.0518                 0.1555
+ SE2      0.0095          1.8113         0.0351                 0.1402
+H2 holds: no detectable improvement in any of the four zones (all adjusted p >= 0.05)
+
+H3: analysis/10_crossborder_gas.py.

@@ -1,0 +1,92 @@
+2025 benchmark, monthly recalibration, expanding window from 2018-01-08.
+
+rMAE (relative to naive D-7)
+zone                 NO1    NO2    NO3    NO4    NO5  mean NO    SE1    SE2    SE3    SE4  DE_LU
+model                                                                                           
+Naive D-1          0.698  0.694  0.659  0.687  0.624    0.672  0.666  0.677  0.742  0.761  0.792
+Naive D-7          1.000  1.000  1.000  1.000  1.000    1.000  1.000  1.000  1.000  1.000  1.000
+LEAR               0.536  0.525  0.527  0.528  0.497    0.523  0.484  0.483  0.508  0.520  0.508
+LightGBM pooled    0.515  0.508  0.499  0.529  0.482    0.507  0.463  0.442  0.485  0.509  0.433
+LightGBM per hour  0.503  0.485  0.493  0.503  0.472    0.491  0.455  0.433  0.473  0.477  0.419
+Ensemble           0.502  0.491  0.499  0.508  0.475    0.495  0.458  0.447  0.472  0.477  0.436
+
+MAE (EUR/MWh)
+zone                 NO1    NO2    NO3   NO4    NO5    SE1    SE2    SE3    SE4  DE_LU
+model                                                                                 
+Naive D-1          17.33  16.82  10.58  5.91  11.29  14.11  14.85  25.19  29.05  25.97
+Naive D-7          24.84  24.23  16.06  8.59  18.07  21.17  21.92  33.97  38.19  32.81
+LEAR               13.32  12.73   8.47  4.54   8.98  10.24  10.58  17.27  19.87  16.66
+LightGBM pooled    12.80  12.31   8.02  4.54   8.71   9.80   9.68  16.46  19.43  14.20
+LightGBM per hour  12.48  11.76   7.93  4.32   8.53   9.64   9.49  16.05  18.23  13.76
+Ensemble           12.47  11.89   8.01  4.36   8.59   9.71   9.79  16.03  18.22  14.29
+
+RMSE (EUR/MWh)
+zone                 NO1    NO2    NO3    NO4    NO5    SE1    SE2    SE3    SE4  DE_LU
+model                                                                                  
+Naive D-1          28.46  28.55  19.52  16.47  20.43  28.18  29.36  38.42  42.55  40.45
+Naive D-7          38.14  38.94  28.09  22.92  28.84  38.75  39.71  49.52  53.32  49.38
+LEAR               21.66  22.08  15.27  12.31  16.28  20.76  22.18  27.02  29.60  27.23
+LightGBM pooled    21.70  21.88  14.81  12.72  16.56  20.69  20.33  25.54  28.23  23.54
+LightGBM per hour  21.30  21.43  14.71  12.20  16.37  20.61  20.60  25.60  26.93  23.13
+Ensemble           20.98  21.34  14.67  12.13  16.08  20.33  20.92  25.45  27.02  23.41
+
+Zones (of 10) where the column model is significantly more accurate than the row model (Holm within zone, p < 0.05)
+column             Naive D-1  Naive D-7  LEAR  LightGBM pooled  LightGBM per hour  Ensemble
+row                                                                                        
+Naive D-1                  0          0    10               10                 10        10
+Naive D-7                 10          0    10               10                 10        10
+LEAR                       0          0     0                1                  8        10
+LightGBM pooled            0          0     0                0                  2         1
+LightGBM per hour          0          0     0                0                  0         0
+Ensemble                   0          0     0                0                  0         0
+
+Main model (per-hour LightGBM) against the others: Holm-adjusted p that the column model is more accurate
+zone                        NO1     NO2     NO3     NO4     NO5    SE1     SE2     SE3     SE4   DE_LU
+row         column                                                                                    
+ensemble    lgbm_hourly  1.0000  1.0000  1.0000  1.0000  1.0000  1.000  0.2190  1.0000  1.0000  0.3383
+lear        lgbm_hourly  0.0053  0.0001  0.0047  0.2356  0.0453  0.063  0.0003  0.0031  0.0005  0.0000
+lgbm_hourly ensemble     1.0000  1.0000  1.0000  1.0000  1.0000  1.000  1.0000  1.0000  1.0000  1.0000
+            lear         1.0000  1.0000  1.0000  1.0000  1.0000  1.000  1.0000  1.0000  1.0000  1.0000
+            lgbm_pooled  1.0000  1.0000  1.0000  1.0000  1.0000  1.000  1.0000  1.0000  1.0000  1.0000
+            naive_d1     1.0000  1.0000  1.0000  1.0000  1.0000  1.000  1.0000  1.0000  1.0000  1.0000
+            naive_d7     1.0000  1.0000  1.0000  1.0000  1.0000  1.000  1.0000  1.0000  1.0000  1.0000
+lgbm_pooled lgbm_hourly  0.7893  0.0319  1.0000  0.0596  1.0000  1.000  1.0000  1.0000  0.0004  0.7556
+naive_d1    lgbm_hourly  0.0000  0.0000  0.0000  0.0000  0.0000  0.000  0.0000  0.0000  0.0000  0.0000
+naive_d7    lgbm_hourly  0.0000  0.0000  0.0000  0.0000  0.0000  0.000  0.0000  0.0000  0.0000  0.0000
+
+Monthly number of trees (per-hour: median over hours) and share of fits that reached the 1,000-tree cap
+                   median_trees cap_share
+model       zone                         
+lgbm_hourly DE_LU         564.0  0.038194
+            NO1           325.5       0.0
+            NO2           292.5  0.006944
+            NO3           108.5       0.0
+            NO4           172.0  0.006944
+            NO5           245.5       0.0
+            SE1           228.0       0.0
+            SE2           569.5  0.034722
+            SE3           528.0  0.052083
+            SE4           440.5  0.013889
+lgbm_pooled DE_LU         536.0       0.0
+            NO1           403.5       0.0
+            NO2           293.0       0.0
+            NO3           113.0       0.0
+            NO4            89.0       0.0
+            NO5           148.5       0.0
+            SE1           125.5       0.0
+            SE2           244.5       0.0
+            SE3           367.5       0.0
+            SE4           309.0       0.0
+
+LEAR penalty (AIC), median over months and hours
+zone
+DE_LU    0.000614
+NO1      0.001826
+NO2      0.002137
+NO3      0.001837
+NO4      0.002585
+NO5      0.002312
+SE1      0.001753
+SE2      0.001732
+SE3      0.001748
+SE4      0.001587

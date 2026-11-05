@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+.cache_openmeteo.sqlite
+logs/*
+!logs/.gitkeep
+# Commodity prices (Yahoo Finance, Ember) are not redistributed; download them with bin/collect_*.py
+data/commodities/

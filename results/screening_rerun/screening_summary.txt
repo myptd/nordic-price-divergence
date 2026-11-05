@@ -1,0 +1,108 @@
+Screening, evaluated on 2024 (no 2025 data used). Selection on the mean 2024 MAE over NO1-NO5.
+
+Chosen LightGBM setting per layout and target
+  lgbm_hourly  level        nl127_lr0.05_md20      mean NO MAE 7.977 (next best nl31_lr0.05_md20 7.983)
+  lgbm_hourly  level_scale  nl127_lr0.05_md50      mean NO MAE 7.675 (next best nl63_lr0.05_md50 7.675)
+  lgbm_hourly  none         nl31_lr0.05_md20       mean NO MAE 8.402 (next best nl127_lr0.05_md20 8.442)
+  lgbm_pooled  level        nl127_lr0.05_md50      mean NO MAE 7.864 (next best nl63_lr0.05_md50 7.881)
+  lgbm_pooled  level_scale  nl63_lr0.05_md50       mean NO MAE 7.776 (next best nl31_lr0.05_md50 7.783)
+  lgbm_pooled  none         nl127_lr0.05_md50      mean NO MAE 8.478 (next best nl63_lr0.05_md50 8.526)
+
+Best target per family (mean NO MAE)
+  LEAR: level_scale  (level_scale 8.123, standard 8.220)
+  lgbm_pooled: level_scale  (none 8.478, level 7.864, level_scale 7.776)
+  lgbm_hourly: level_scale  (none 8.402, level 7.977, level_scale 7.675)
+  ensemble = LEAR level_scale + per-hour LightGBM level_scale (nl127_lr0.05_md50)
+
+rMAE in 2024 (vs naive D-7), chosen settings
+zone                                    NO1    NO2    NO3    NO4    NO5    SE1    SE2    SE3    SE4  DE_LU
+version                                                                                                   
+ensemble | level_scale + level_scale  0.486  0.526  0.411  0.412  0.479  0.433  0.388  0.450  0.487  0.422
+lear | level_scale                    0.519  0.554  0.434  0.417  0.504  0.453  0.411  0.472  0.528  0.484
+lear | standard                       0.522  0.558  0.439  0.444  0.502  0.461  0.424  0.488  0.513  0.464
+lgbm_hourly | level                   0.509  0.545  0.417  0.443  0.479  0.453  0.403  0.460  0.504  0.419
+lgbm_hourly | level_scale             0.478  0.524  0.409  0.426  0.470  0.437  0.395  0.455  0.489  0.423
+lgbm_hourly | none                    0.542  0.571  0.433  0.459  0.514  0.452  0.407  0.470  0.510  0.441
+lgbm_pooled | level                   0.493  0.522  0.429  0.447  0.480  0.487  0.433  0.456  0.500  0.428
+lgbm_pooled | level_scale             0.483  0.516  0.426  0.445  0.475  0.478  0.427  0.465  0.506  0.457
+lgbm_pooled | none                    0.551  0.559  0.454  0.466  0.518  0.472  0.431  0.461  0.504  0.426
+lstm | level                          0.491  0.531  0.418  0.448  0.461  0.454  0.391  0.448  0.497    NaN
+naive_d1 | -                          0.676  0.715  0.618  0.620  0.619  0.661  0.662  0.691  0.707  0.848
+naive_d7 | -                          1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000
+tcn | level                           0.498  0.519  0.406  0.437  0.452  0.461  0.401  0.429  0.485    NaN
+transformer | level                   0.495  0.524  0.426  0.433  0.473  0.438  0.398  0.450  0.506    NaN
+
+MAE in 2024 (EUR/MWh), chosen settings
+zone                                    NO1    NO2    NO3    NO4    NO5    SE1    SE2    SE3    SE4  DE_LU
+version                                                                                                   
+ensemble | level_scale + level_scale   9.22  11.16   6.33   4.62   7.28   8.07   7.25  11.89  19.12  13.84
+lear | level_scale                     9.84  11.75   6.70   4.67   7.66   8.43   7.68  12.47  20.71  15.87
+lear | standard                        9.89  11.83   6.77   4.98   7.64   8.59   7.93  12.90  20.14  15.22
+lgbm_hourly | level                    9.64  11.56   6.43   4.96   7.28   8.44   7.54  12.15  19.77  13.73
+lgbm_hourly | level_scale              9.05  11.10   6.31   4.77   7.14   8.14   7.38  12.01  19.18  13.88
+lgbm_hourly | none                    10.28  12.10   6.67   5.14   7.82   8.43   7.61  12.41  20.02  14.47
+lgbm_pooled | level                    9.34  11.06   6.61   5.00   7.30   9.07   8.09  12.03  19.62  14.05
+lgbm_pooled | level_scale              9.15  10.95   6.57   4.99   7.22   8.91   7.98  12.28  19.86  14.98
+lgbm_pooled | none                    10.44  11.86   7.00   5.22   7.87   8.80   8.05  12.18  19.77  13.99
+lstm | level                           9.31  11.25   6.44   5.02   7.01   8.46   7.32  11.84  19.49    NaN
+naive_d1 | -                          12.81  15.16   9.53   6.95   9.42  12.31  12.38  18.24  27.74  27.83
+naive_d7 | -                          18.95  21.20  15.42  11.20  15.20  18.63  18.69  26.41  39.24  32.80
+tcn | level                            9.43  11.01   6.27   4.90   6.87   8.60   7.49  11.34  19.02    NaN
+transformer | level                    9.38  11.11   6.57   4.85   7.19   8.17   7.44  11.89  19.87    NaN
+
+Early stopping runs that reached the 1,000-tree cap (share of fits)
+model        target     
+lgbm_hourly  level          0.003
+             level_scale    0.009
+             none           0.001
+lgbm_pooled  level          0.008
+             level_scale    0.000
+             none           0.000
+  all fits: 0.004 of 9,000;  fits of the chosen settings: 0.008 of 750
+
+Cap hits by setting (share of fits)
+model              lgbm_hourly  lgbm_pooled
+setting                                    
+nl127_lr0.05_md20        0.006        0.000
+nl127_lr0.05_md50        0.008        0.000
+nl127_lr0.1_md20         0.000        0.000
+nl127_lr0.1_md50         0.003        0.000
+nl31_lr0.05_md20         0.006        0.000
+nl31_lr0.05_md50         0.011        0.000
+nl31_lr0.1_md20          0.000        0.000
+nl31_lr0.1_md50          0.003        0.000
+nl63_lr0.05_md20         0.004        0.033
+nl63_lr0.05_md50         0.008        0.000
+nl63_lr0.1_md20          0.001        0.000
+nl63_lr0.1_md50          0.003        0.000
+
+Deep models: best epoch on 2023 (used for the refit), by zone and seed
+seed               7     42    123
+model       zone                  
+lstm        NO1   15.0  20.0  29.0
+            NO2   31.0  19.0  20.0
+            NO3   29.0  31.0  34.0
+            NO4   24.0  27.0  22.0
+            NO5   30.0  30.0  29.0
+            SE1   26.0  17.0  23.0
+            SE2   23.0  20.0  15.0
+            SE3   12.0  32.0  29.0
+            SE4   30.0  21.0  15.0
+tcn         NO1   26.0  45.0  14.0
+            NO2   18.0  17.0  25.0
+            NO3   13.0  16.0  12.0
+            NO4   91.0  35.0  38.0
+            NO5   19.0  23.0  23.0
+            SE1   18.0  12.0  18.0
+            SE2   18.0  15.0  18.0
+            SE3   18.0  42.0  18.0
+            SE4   46.0  20.0  20.0
+transformer NO1   35.0  32.0  23.0
+            NO2   36.0  36.0  34.0
+            NO3   21.0  31.0  20.0
+            NO4   30.0  24.0  20.0
+            NO5   16.0  22.0  20.0
+            SE1   23.0  17.0  25.0
+            SE2   19.0  15.0  21.0
+            SE3   17.0  35.0  24.0
+            SE4   25.0  21.0  32.0

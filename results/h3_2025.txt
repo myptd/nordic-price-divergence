@@ -1,0 +1,12 @@
+H3: outcome = daily MAE without - with the cross-border inputs (EUR/MWh), treatment = TTF
+close of D-2 (per standard deviation), total version, cross-fitting over calendar months, Newey-West (7 lags).
+theta > 0: the gas-related error is larger without the inputs.
+
+                     zone  n_days   theta     se  p_two_sided  p_one_sided  variance_left
+                      NO1     365  0.2485 0.2705       0.3582       0.1791         0.1804
+                      NO2     365  0.9449 0.3349       0.0048       0.0024         0.1754
+                      SE3     365 -1.4710 0.4248       0.0005       0.9997         0.1739
+                      SE4     365  0.2640 0.3604       0.4639       0.2320         0.1864
+pooled (inverse-variance)    1460  0.1591 0.1671       0.3408       0.1704            NaN
+
+Pooled theta = 0.1591 EUR/MWh per SD (s.e. 0.1671), z = 0.952, one-sided p = 0.1704: NOT SUPPORTED (p >= 0.05)

@@ -1,0 +1,4 @@
+zone,model,seed,epochs_run,best_epoch,best_es_loss
+NO2,transformer,42,61,36,0.4134076237678528
+NO2,transformer,7,61,36,0.41941604018211365
+NO2,transformer,123,59,34,0.4162059724330902

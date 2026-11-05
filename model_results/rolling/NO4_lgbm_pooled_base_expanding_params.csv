@@ -1,0 +1,13 @@
+month,hour,n_trees,cap_hit,zone,model,inputs,window,target
+2025-01-01,-1,225,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-02-01,-1,239,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-03-01,-1,212,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-04-01,-1,116,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-05-01,-1,74,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-06-01,-1,102,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-07-01,-1,87,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-08-01,-1,51,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-09-01,-1,91,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-10-01,-1,45,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-11-01,-1,51,False,NO4,lgbm_pooled,base,expanding,level_scale
+2025-12-01,-1,42,False,NO4,lgbm_pooled,base,expanding,level_scale

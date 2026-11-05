@@ -1,0 +1,17 @@
+no_vre delta rMAE (2025) against 2024 generation shares, ten zones; Spearman, exact two-sided p (10! orderings).
+
+       delta_no_vre  wind_solar_share  hydro_share
+zone                                              
+SE4          0.0733           71.6953      15.5382
+NO2          0.0205            8.1510      91.6328
+NO1          0.0125            4.5042      94.8326
+SE3          0.0630           14.8449      15.4558
+NO5          0.0000            0.0000      99.4429
+NO3          0.0194           24.8337      74.3794
+SE1          0.0362           30.5999      68.8057
+SE2          0.0709           32.1644      66.3344
+NO4          0.0324           14.2677      78.5134
+DE_LU        0.1301           46.0520       6.3896
+
+wind_solar_share: rho = 0.891, exact two-sided p = 0.0011
+hydro_share: rho = -0.927, exact two-sided p = 0.0003

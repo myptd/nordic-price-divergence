@@ -1,0 +1,18 @@
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+ & \multicolumn{4}{c}{Coupled} & \multicolumn{1}{c}{} & \multicolumn{4}{c}{Isolated} & \multicolumn{1}{c}{} \\
+\cmidrule(lr){2-5} \cmidrule(lr){7-10}
+Forecast & SE4 & NO2 & NO1 & SE3 & NO5 & NO3 & SE1 & SE2 & NO4 & DE-LU \\
+\midrule
+Naive D-1 & 0.761$^{\dagger}$ & 0.694$^{\dagger}$ & 0.698$^{\dagger}$ & 0.742$^{\dagger}$ & 0.624$^{\dagger}$ & 0.659$^{\dagger}$ & 0.666$^{\dagger}$ & 0.677$^{\dagger}$ & 0.687$^{\dagger}$ & 0.792$^{\dagger}$ \\
+Naive D-7 & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ & 1.000$^{\dagger}$ \\
+LEAR & 0.520$^{\dagger}$ & 0.525$^{\dagger}$ & 0.536$^{\dagger}$ & 0.508$^{\dagger}$ & 0.497$^{\dagger}$ & 0.527$^{\dagger}$ & 0.484 & 0.483$^{\dagger}$ & 0.528 & 0.508$^{\dagger}$ \\
+LightGBM pooled & 0.509$^{\dagger}$ & 0.508$^{\dagger}$ & 0.515 & 0.485 & 0.482 & 0.499 & 0.463 & 0.442 & 0.529 & 0.433 \\
+LightGBM per hour & 0.477 & \textbf{0.485} & 0.503 & 0.473 & \textbf{0.472} & \textbf{0.493} & \textbf{0.455} & \textbf{0.433} & \textbf{0.503} & \textbf{0.419} \\
+Ensemble & \textbf{0.477} & 0.491 & \textbf{0.502} & \textbf{0.472} & 0.475 & 0.499 & 0.458 & 0.447 & 0.508 & 0.436 \\
+\midrule
+Improvement over naive D-1 (\%) & 37.3 & 30.0 & 28.0 & 36.3 & 24.4 & 25.1 & 31.7 & 36.1 & 26.9 & 47.0 \\
+MAE of LightGBM per hour (EUR/MWh) & 18.2 & 11.8 & 12.5 & 16.1 & 8.5 & 7.9 & 9.6 & 9.5 & 4.3 & 13.8 \\
+Mean price 2025 (EUR/MWh) & 60.4 & 65.4 & 58.4 & 46.2 & 46.9 & 21.1 & 16.7 & 16.5 & 8.7 & 89.3 \\
+\bottomrule
+\end{tabular}

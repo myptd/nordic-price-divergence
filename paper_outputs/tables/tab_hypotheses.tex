@@ -1,0 +1,9 @@
+\begin{tabular}{@{}p{0.6cm}p{3.9cm}p{3.6cm}p{5.2cm}p{2.1cm}@{}}
+\toprule
+& Expectation & Test & Result (2025) & Outcome \\
+\midrule
+H1 & The gain from neighbouring prices increases with coupling (nine Nordic zones) & Spearman rank correlation, exact one-sided permutation test & $\rho = -0.10$, $p = 0.612$ & Not supported \\[3pt]
+H2 & No significant gain in the four zones below the median (NO3, SE1, SE2, NO4) & One-sided multivariate DM per zone, Holm over the four zones & Holm $p$: NO3 0.179; SE1 0.156; SE2 0.140; NO4 0.156 & Holds (no detectable gain) \\[3pt]
+H3 & In the four zones above the median, neighbouring prices reduce the gas-related error & Double machine learning, pooled inverse-variance estimate, one-sided $z$-test & Pooled $\theta = 0.16$ (s.e.\ 0.17), $p = 0.170$; zones: SE4 +0.26 (0.36); NO2 +0.94 (0.33); NO1 +0.25 (0.27); SE3 -1.47 (0.42) & Not supported \\[3pt]
+\bottomrule
+\end{tabular}

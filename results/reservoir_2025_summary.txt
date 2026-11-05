@@ -1,0 +1,18 @@
+Reservoir inputs (ENTSO-E stored energy, 1- and 4-week change) in per-hour LightGBM, 2025.
+delta = rMAE without - rMAE with (positive: the inputs help); DM one-sided, Holm across the nine zones per direction.
+
+zone  hydro_share_2024  coupling_2024  n_hours  MAE_without  MAE_with  rMAE_without  rMAE_with  delta_rMAE  pct_MAE  ci_low  ci_high  dm_with_better  p_with_better  p_without_better  p_with_better_holm  p_without_better_holm
+ NO1           94.8326          0.551     8759      12.4822   12.4805        0.5025     0.5025      0.0001   0.0136 -0.0031   0.0033          0.0425         0.4831            0.5169                 1.0                 1.0000
+ NO2           91.6328          0.668     8759      11.7648   11.8354        0.4855     0.4884     -0.0029  -0.6003 -0.0059  -0.0000         -2.0194         0.9783            0.0217                 1.0                 0.1955
+ NO3           74.3794          0.304     8759       7.9253    7.9511        0.4935     0.4951     -0.0016  -0.3247 -0.0042   0.0010         -1.1957         0.8841            0.1159                 1.0                 0.9273
+ NO4           78.5134          0.248     8759       4.3199    4.3457        0.5028     0.5058     -0.0030  -0.5967 -0.0088   0.0019         -1.0803         0.8600            0.1400                 1.0                 0.9273
+ NO5           99.4429          0.424     8759       8.5314    8.5295        0.4720     0.4719      0.0001   0.0216 -0.0028   0.0028          0.0723         0.4712            0.5288                 1.0                 1.0000
+ SE1           68.8057          0.277     8759       9.6401    9.6733        0.4553     0.4569     -0.0016  -0.3453 -0.0048   0.0014         -0.9765         0.8356            0.1644                 1.0                 0.9273
+ SE2           66.3344          0.249     8759       9.4895    9.4924        0.4329     0.4330     -0.0001  -0.0314 -0.0026   0.0023         -0.1100         0.5438            0.4562                 1.0                 1.0000
+ SE3           15.4558          0.538     8759      16.0511   16.0393        0.4726     0.4722      0.0003   0.0736 -0.0025   0.0032          0.2394         0.4054            0.5946                 1.0                 1.0000
+ SE4           15.5382          0.710     8759      18.2259   18.2856        0.4773     0.4789     -0.0016  -0.3273 -0.0044   0.0010         -1.1650         0.8780            0.1220                 1.0                 0.9273
+
+Mean delta over NO1-NO5: -0.0015; over SE1-SE4: -0.0007
+Significant gain (Holm < 0.05): none
+Significant loss (Holm < 0.05): none
+Descriptive: Spearman rho(delta, hydro share 2024) = -0.150 (p = 0.700); rho(delta, coupling 2024) = 0.267 (p = 0.488)

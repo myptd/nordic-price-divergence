@@ -83,6 +83,11 @@ def peak_wind_mw(zone):
 def main():
     rng = np.random.default_rng(SEED)
     t = pd.DataFrame([gains(z, yr, rng) for yr in [2024, 2025] for z in ps.ZONES])
+    # Use the 2025 EUR/MWh intervals of analysis/16 (Table S6) so that the supplementary tables report one interval.
+    e = pd.read_csv("results/tso_gain_eur_2025.csv").query("input_set == 'no_vre'").set_index("zone")
+    i25 = t.year == 2025
+    t.loc[i25, "gain_eur_low"] = t.loc[i25, "zone"].map(e.ci_low).values
+    t.loc[i25, "gain_eur_high"] = t.loc[i25, "zone"].map(e.ci_high).values
     t.to_csv("results/tso_gain_2024.csv", index=False)
 
     mix = pd.read_csv("results/market_types_2024.csv").set_index("zone")
